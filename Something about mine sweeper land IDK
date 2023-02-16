@@ -1,0 +1,14 @@
+import sys
+
+SEPARATOR = " "
+
+num_cases = int(sys.stdin.readline().rstrip())
+
+for _ in range(num_cases):
+    line = sys.stdin.readline().rstrip()
+
+    rows, cols, bombs = (int(val) for val in line.split(SEPARATOR))
+    
+    arr = [[0 for _ in range(rows)]for _ in range(cols)]
+    
+    print(arr)
