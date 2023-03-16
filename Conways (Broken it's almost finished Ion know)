@@ -1,0 +1,57 @@
+'''System module'''
+import sys
+import string
+
+SEPARATOR = " "
+
+map = []
+
+
+cases = int(sys.stdin.readline().rstrip())
+
+for caseNum in range(cases):
+    gens = int(sys.stdin.readline().rstrip())
+    for i in range(10):
+        map.append(list(sys.stdin.readline().rstrip()))
+        
+    
+    
+    for w in range(gens):
+        clone = map[:]
+        for i in range(10):
+            for j in range(10):
+                counter = 0
+                if i<9 and clone[i+1][j] == 1:
+                    counter+=1
+                if j<9 and clone[i][j+1] == 1:
+                    counter+=1
+                if i<9 and j<9 and clone[i+1][j+1]==1:
+                    counter+=1
+                if i<9 and j>0 and clone[i+1][j-1]==1:
+                    counter +=1
+                    
+                if i>0 and clone[i-1][j] == 1:
+                    counter+=1
+                if j>0 and clone[i][j-1] == 1:
+                    counter+=1
+                if i>0 and j<9 and clone[i-1][j+1]==1:
+                    counter+=1
+                if i>0 and j>0 and clone[i-1][j-1]==1:
+                    counter +=1
+                    
+                if clone[i][j]==1 and counter <=1:
+                    map[i][j]= 0
+                    
+                if clone[i][j]==1 and counter ==2 or counter==3:
+                    map[i][j]=1
+                    
+                if clone[i][j]==1 and counter >=4:
+                    map[i][j]=0
+                    
+                if clone[i][j]==0 and counter ==3:
+                    map[i][j]=1
+
+    for i in range(10):
+        for j in range(10):
+            print(map[i][j], end="")
+        print()
