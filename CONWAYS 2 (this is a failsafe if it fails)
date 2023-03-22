@@ -1,61 +1,47 @@
 '''System module'''
 import sys
-import string
-
-SEPARATOR = " "
-
-map = []
-
-
 
 cases = int(sys.stdin.readline().rstrip())
 
 for caseNum in range(cases):
+    map = []
+    clone = []
     gens = int(sys.stdin.readline().rstrip())
     for i in range(10):
         map.append(list(sys.stdin.readline().rstrip()))
         
-    
-    clone = map[:]
+    clone[:] = map[:]
     for w in range(gens):
         for i in range(10):
             for j in range(10):
-                clone[i][j] = map[i][j]
+                clone[i][j] = map [i][j]
         for i in range(10):
             for j in range(10):
                 counter = 0
-                if i<9 and clone[i+1][j] == "1":
-                    counter+=1
-                if j<9 and clone[i][j+1] == "1":
-                    counter+=1
-                if i<9 and j<9 and clone[i+1][j+1]=="1":
-                    counter+=1
-                if i<9 and j>0 and clone[i+1][j-1]=="1":
-                    counter +=1
-                    
-                if i>0 and clone[i-1][j] == "1":
-                    counter+=1
-                if j>0 and clone[i][j-1] == "1":
-                    counter+=1
-                if i>0 and j<9 and clone[i-1][j+1]=="1":
-                    counter+=1
-                if i>0 and j>0 and clone[i-1][j-1]=="1":
-                    counter +=1
+                for y in range(-1,2):
+                    for x in range(-1,2):
+                        if y+i >= 0 and y+i < 10 and x+j >= 0 and x+j < 10 and (y + i, x + j) != (y,x):
+                            if clone[y+i][x+j] != "0":
+                                counter += 1
                 
-                
-                if clone[i][j]=="1" and counter >=4:
+                if map[i][j] == "1" and counter >=4:
                     map[i][j]="0"
                     
-                elif clone[i][j]=="1" and counter >= 2:
+                elif map[i][j] == "1" and counter >= 2:
                     map[i][j]="1"
                     
-                elif clone[i][j]=="1" and counter >= 0:
+                elif map[i][j] == "1" and counter >= 0:
                     map[i][j]= "0"
                     
-                if clone[i][j]=="0" and counter ==3:
+                if map[i][j] == "0" and counter == 3:
                     map[i][j]="1"
 
-    for i in range(10):
-        for j in range(10):
-            print(map[i][j], end="")
+
+
+
+        print("Post GENERATION, this is generation,", w, " and the array looiks like")
         print()
+        for i in range(10):
+            for j in range(10):
+                print(map[i][j], end="")
+            print()
