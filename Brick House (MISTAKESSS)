@@ -1,0 +1,43 @@
+import sys
+import math
+import string
+
+num = int(input())
+
+
+
+
+for i in range(num):
+    line = sys.stdin.readline().rstrip()
+    Brick = line.split(" ")
+    
+    for i in range(len(Brick)):
+        Brick[i] = int(Brick[i])
+    
+    
+
+    if Brick[0] + Brick[1]*5 == Brick[2]:
+        print("true")
+    elif Brick[2] % 5 == 0 and Brick [2] / 5 <= Brick[1]:
+        print("true")
+    elif Brick[2] <= Brick[0]:
+        print("true")
+    elif Brick[2] < Brick[0] + Brick[1] * 5:
+        if Brick[2] - Brick[1]*5 > 0:
+            Brick[2] -= Brick[1]*5
+            if Brick[0] >= Brick[2]:
+                print("true")
+            else:
+                print("false")
+        else:
+            while Brick[2] > 5 and Brick[1] != 0:
+                Brick[2] -= 5
+                Brick[1] -= 1
+            if Brick[0] >= Brick[2]:
+                print("true")
+            else:
+                print("false")
+            
+                
+    else:
+        print("false")
